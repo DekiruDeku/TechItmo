@@ -1,5 +1,8 @@
 package ru.billing.StockList;
 
+import ru.billing.Exception.CatalogLoadException;
+import ru.billing.Exception.ItemAlreadyExistsException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +14,10 @@ public class ItemCatalog {
     public HashMap GetCatalog(){return this.catalog;}
     public void SetCatalog(HashMap<Integer, GenericItem> mapa){this.catalog = mapa;}
 
-    public void addItem(GenericItem item) {
+    public void addItem(GenericItem item) throws ItemAlreadyExistsException {
+
+        if(catalog.containsValue(item))
+            throw new ItemAlreadyExistsException();
         catalog.put(item.idOfProduct, item); // Добавляем товар в HashMap
         ALCatalog.add(item); // Добавляем тот же товар в ArrayList
     }

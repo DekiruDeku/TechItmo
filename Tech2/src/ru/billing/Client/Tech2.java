@@ -1,5 +1,7 @@
 package ru.billing.Client;
 
+import ru.billing.Exception.CatalogLoadException;
+import ru.billing.Exception.ItemAlreadyExistsException;
 import ru.billing.StockList.FoodItem;
 import ru.billing.StockList.GenericItem;
 import ru.billing.StockList.ItemCatalog;
@@ -10,8 +12,7 @@ import java.util.Date;
 
 public class Tech2 {
 
-    public static void main(String[]args)
-    {
+    public static void main(String[]args) throws ItemAlreadyExistsException, CatalogLoadException {
         GenericItem genericItem1 = new GenericItem(123, "Соль", 12);
         GenericItem genericItem2 = new GenericItem(231, "Сахар", 8);
         GenericItem genericItem3 = new GenericItem(312, "Перец", 5);
@@ -73,6 +74,8 @@ public class Tech2 {
         end = new Date().getTime();
         System.out.println("In ArrayList: "+(end-begin));
 
+        CatalogFileLoader cata = new CatalogFileLoader("C://Games/items.lst ");
+        cata.load(itemCatalog);
     }
 
 }
